@@ -1,0 +1,41 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html">
+	
+	<h:form style="display: inline-block" enctype="multipart/form-data" acceptcharset="UTF-8">
+	<nav class="aw-menu">
+		<ul>
+			<li>
+				<h:link outcome="/Home"><i class="fa  fa-fw  fa-home"></i>Pagina Inicial</h:link>
+			</li>
+			
+			<li>
+				<h:link outcome="/site/Pessoa/Consulta/Pessoa"><i class="fa  fa-fw  fa-user"></i>Usuario</h:link>
+			</li>
+			
+			<li>
+				<h:link outcome="/site/Pessoa/MudarSenha/MudarSenha"><i class="fa  fa-fw  fa-user"></i>Mudar Sua Senha</h:link>
+			</li>
+			
+			<!-- 
+			<li>
+				<h:link outcome="/site/Grupo/Consulta/Grupo"><i class="fa fa-users"></i>Grupo</h:link>
+			</li>
+			 -->
+			
+			<li>
+				<h:link outcome="/site/Delegacia/Consulta/Delegacia"><i class="fa  fa-fw  fa-cog"></i>Delegacia</h:link>
+			</li>
+			
+			<li>
+				<h:link outcome="/site/Ponto/Novo/Ponto"><i class="fa  fa-fw  fa-cog"></i>Ponto</h:link>
+			</li>
+			
+			<li>
+				<h:commandLink action="#{loginBean.sair()}" value="Sair" />
+			</li>
+			
+		</ul>
+	</nav>
+	</h:form>
+</ui:composition>

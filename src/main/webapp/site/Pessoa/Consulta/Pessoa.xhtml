@@ -1,0 +1,93 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" 
+	template="/WEB-INF/template/Layout.xhtml">
+
+	<ui:define name="content">
+		<h1 class="aw-page-title">Pessoa</h1>
+
+		<h:form id="frm">
+
+			<p:toolbar id="toolbar">
+				<p:toolbarGroup>
+
+					<p:commandButton value="Novo" icon="ui-icon-plus"
+						action="#{pessoaBean.novo}" process="@this"
+						disabled="#{not seguranca.acessoCadastroPermitido}"/>
+
+					<span class="ui-separator"> <span
+						class="ui-icon ui-icon-grip-dotted-vertical" />
+					</span>
+
+					<p:commandButton value="Editar" icon="ui-icon-pencil"
+						title="Editar" process="@this" action="#{pessoaBean.edicao}"
+						disabled="#{pessoaBean.pessoaSelecionada == null or not seguranca.acessoEdicaoPermitido}" />
+
+					<span class="ui-separator"> <span
+						class="ui-icon ui-icon-grip-dotted-vertical" />
+					</span>
+
+					<p:commandButton value="Excluir" icon="ui-icon-trash"
+						title="Excluir" process="@this" update="tabela_pessoas toolbar"
+						action="#{pessoaBean.excluir}"
+						disabled="#{pessoaBean.pessoaSelecionada == null or not seguranca.acessoRemocaoPermitido}"
+						onclick="if (!confirm('Deseja deletar  #{pessoaBean.pessoaSelecionada.login} ? ')) return false" />
+
+					<span class="ui-separator"> <span
+						class="ui-icon ui-icon-grip-dotted-vertical" />
+					</span>
+
+					<p:commandButton value="Alterar Senha" icon="ui-icon-pencil"
+						title="Editar" process="@this" action="#{pessoaBean.alteracaoSenha}"
+						disabled="#{pessoaBean.pessoaSelecionada == null or not seguranca.acessoEdicaoPermitido}" />
+					
+
+				</p:toolbarGroup>
+			</p:toolbar>
+
+			<p:dataTable id="tabela_pessoas" var="pessoa"
+				value="#{pessoaBean.listar()}" frame="box" rules="all"
+				cellpadding="3" width="100%" headerClass="cabecalho"
+				rowClasses="cor-sim, cor-nao" columnClasses="nome"
+				emptyMessage="Nenhuma pessoa Cadastrada"
+				selection="#{pessoaBean.pessoaSelecionada}" selectionMode="single"
+				rowKey="#{pessoa.codigo}">>
+				
+			<p:ajax event="rowSelect" update=":frm:toolbar" />
+			<p:ajax event="rowUnselect" update=":frm:toolbar" />
+
+				<p:column filterBy="#{pessoa.login}"
+					style="text-align: center; width:5%" filterMatchMode="startsWith">
+					<f:facet name="header">
+						<h:outputText value="Login" />
+					</f:facet>
+					<h:outputText value="#{pessoa.login}" />
+				</p:column>
+
+				<p:column filterBy="#{pessoa.delegacia.nome}"
+					style="text-align: center; width:5%" filterMatchMode="startsWith">
+					<f:facet name="header">
+						<h:outputText value="Delegacia" />
+					</f:facet>
+					<h:outputText value="#{pessoa.delegacia.nome}" />
+				</p:column>
+				
+				<p:column style="text-align: center; width:5%">
+					<f:facet name="header">
+						<h:outputText value="Grupos" />
+					</f:facet>
+					<ui:repeat var="grupo" value="#{pessoa.grupos}">
+						<h:outputText value="#{grupo.nome}" />
+						<br></br>
+					</ui:repeat>
+				</p:column>
+				
+
+
+			</p:dataTable>
+		</h:form>
+	</ui:define>
+
+</ui:composition>

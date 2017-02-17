@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	
+	<h:head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<title>#{msg.login}</title>
+		
+		<h:outputStylesheet library="css" name="sistema.css"/>
+	</h:head>
+	<h:body>
+	<f:metadata>
+		<f:viewParam name="dummy"/>
+		<f:event listener="#{loginBean.preRender}" type="preRenderView"></f:event>
+	</f:metadata>
+	
+	
+		<div id="content">
+			<div style="width: 240px; margin-left: auto; margin-right: auto; margin-top: 150px">
+				<h1>#{msg.login}</h1>
+		
+				<h:form id="frm" prependId="false">
+		
+					<p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
+		
+					<p:panelGrid columns="2" styleClass="form-grid" style="padding: 10px"
+							columnClasses="label, campo" id="panel">
+					
+						<p:outputLabel value="Login"/>
+						<p:inputText id="j_username" size="20" />
+						
+						<p:outputLabel value="Senha"/>
+						<p:password id="j_password" size="20"/>
+						
+						
+						<p:commandButton value="Logar" action="#{loginBean.logar}" ajax="false"/>
+					</p:panelGrid>
+				</h:form>
+			</div>
+		</div>
+	</h:body>
+</html>

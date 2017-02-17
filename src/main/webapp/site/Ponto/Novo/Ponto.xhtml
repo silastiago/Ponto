@@ -1,0 +1,216 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/template/Layout.xhtml">
+
+	<ui:define name="content">
+		<h1 class="aw-page-title">Cadastro de Pontos</h1>
+
+		<h:form id="frm">
+
+			<p:toolbar id="toolbar">
+				<p:toolbarGroup>
+					
+					<p:commandButton value="Consulta" icon="ui-icon-search"
+						action="#{pontoBean.consulta()}" process="@this"
+						disabled="#{not seguranca.acessoCadastroPermitido}"/>
+
+					<span class="ui-separator"> <span
+						class="ui-icon ui-icon-grip-dotted-vertical" />
+					</span>
+
+				</p:toolbarGroup>
+			</p:toolbar>
+			
+				
+
+			<div class="ui-fluid">
+				<div class="ui-box">
+				
+				<p:messages for ="message" showDetail="true" autoUpdate="true" closable="true" />
+				
+					<p:panelGrid id="capaPanel" columns="2" layout="grid"
+						style="margin-top: 20px; margin-bottom: 40px"
+						styleClass="panelgrid-noborder"
+						columnClasses="ui-grid-col-1, ui-grid-col-2">
+
+						<p:outputLabel for="data" value="Data: " />
+						<p:inputMask id="data" value="#{pontoBean.data}" mask="99/99/9999"
+							readonly="true" size="7" />
+
+						<p:outputLabel value="Hora: " />
+						<p:clock pattern="HH:mm:ss" mode="server"></p:clock>
+
+					</p:panelGrid>					
+					 
+					
+					<p:panelGrid id="capaPanel2" columns="3" layout="grid"
+						style="margin-top: 20px; margin-bottom: 40px"
+						styleClass="panelgrid-noborder"
+						columnClasses="ui-grid-col-3">
+
+						<p:commandButton value="Cadastrar Entrada"
+							action="#{pontoBean.cadastrarEntrada()}" process="@this" update="@form"
+							rendered="#{pontoBean.renderizarBotaoCadastrarEntrada and pontoBean.numeroCadastro > 2}" />
+
+						<p:commandButton value="Cadastrar Saida"
+							action="#{pontoBean.cadastrarSaida()}" process="@this" update="@form"
+							rendered="#{not pontoBean.renderizarBotaoCadastrarEntrada and pontoBean.numeroCadastro > 2}" />
+
+
+					<p:outputLabel value="Quais os 2 ultimos digitos do seu CPF ?" for="pegarDoisUltimosDigitosCPF" rendered="#{pontoBean.numeroAleatorio == 0 and not seguranca.acessoCadastroPermitido and pontoBean.numeroPergunta > 0}"/>
+					<p:inputMask id="pegarDoisUltimosDigitosCPF" value="#{pontoBean.pessoa.cpf}" rendered="#{pontoBean.numeroAleatorio == 0 and not seguranca.acessoCadastroPermitido and pontoBean.numeroPergunta > 0}" mask="99"/>
+					
+					<p:outputLabel value="Quais os 3 primeiros digitos do seu CPF ?" for="pegarTresPrimeirosDigitosCPF" rendered="#{pontoBean.numeroAleatorio == 1 and not seguranca.acessoCadastroPermitido and pontoBean.numeroPergunta > 0}"/>
+					<p:inputMask id="pegarTresPrimeirosDigitosCPF" value="#{pontoBean.pessoa.cpf}" rendered="#{pontoBean.numeroAleatorio == 1 and not seguranca.acessoCadastroPermitido and pontoBean.numeroPergunta > 0}" mask="999"/>
+					
+					<p:outputLabel value="Quais os 3 primeiros digitos do seu RG ?" for="pegarTresPrimeirosDigitosRG" rendered="#{pontoBean.numeroAleatorio == 2 and not seguranca.acessoCadastroPermitido and pontoBean.numeroPergunta > 0}"/>
+					<p:inputMask id="pegarTresPrimeirosDigitosRG" value="#{pontoBean.pessoa.rg}" rendered="#{pontoBean.numeroAleatorio == 2 and not seguranca.acessoCadastroPermitido and pontoBean.numeroPergunta > 0}" mask="999"/>
+					
+					<p:outputLabel value="Quais os 3 ultimos digitos do seu RG ?" for="pegarTresUltimosDigitosRG" rendered="#{pontoBean.numeroAleatorio == 3 and not seguranca.acessoCadastroPermitido and pontoBean.numeroPergunta > 0}"/>
+					<p:inputMask id="pegarTresUltimosDigitosRG" value="#{pontoBean.pessoa.rg}" rendered="#{pontoBean.numeroAleatorio == 3 and not seguranca.acessoCadastroPermitido and pontoBean.numeroPergunta > 0}" mask="999"/>
+					
+					<p:outputLabel value="Qual o seu primeiro nome ?" for="pegarPrimeiroNome" rendered="#{pontoBean.numeroAleatorio == 4 and not seguranca.acessoCadastroPermitido and pontoBean.numeroPergunta > 0}"/>
+					<p:inputText id="pegarPrimeiroNome" value="#{pontoBean.pessoa.nome}" rendered="#{pontoBean.numeroAleatorio == 4 and not seguranca.acessoCadastroPermitido and pontoBean.numeroPergunta > 0}"/>
+					
+					<p:outputLabel value="Qual o primeiro nome da sua Mae?" for="pegarPrimeiroNomeMae" rendered="#{pontoBean.numeroAleatorio == 5 and not seguranca.acessoCadastroPermitido and pontoBean.numeroPergunta > 0}"/>
+					<p:inputText id="pegarPrimeiroNomeMae" value="#{pontoBean.pessoa.nomeMae}" rendered="#{pontoBean.numeroAleatorio == 5 and not seguranca.acessoCadastroPermitido and pontoBean.numeroPergunta > 0}"/>
+					
+					<p:outputLabel value="Qual o primeiro nome do seu pai?" for="pegarPrimeiroNomePai" rendered="#{pontoBean.numeroAleatorio == 6 and not seguranca.acessoCadastroPermitido and pontoBean.numeroPergunta > 0}"/>
+					<p:inputText id="pegarPrimeiroNomePai" value="#{pontoBean.pessoa.nomePai}" rendered="#{pontoBean.numeroAleatorio == 6 and not seguranca.acessoCadastroPermitido and pontoBean.numeroPergunta > 0}"/>
+
+					<p:outputLabel value="Qual o seu sobrenome ?" for="pegarSobreNome" rendered="#{pontoBean.numeroAleatorio == 7 and not seguranca.acessoCadastroPermitido and pontoBean.numeroPergunta > 0}"/>
+					<p:inputText id="pegarSobreNome" value="#{pontoBean.pessoa.sobreNome}" rendered="#{pontoBean.numeroAleatorio == 7 and not seguranca.acessoCadastroPermitido and pontoBean.numeroPergunta > 0}"/>
+
+					<p:outputLabel value="Qual o sobrenome da sua Mãe?" for="pegarSobreNomeMae" rendered="#{pontoBean.numeroAleatorio == 8 and not seguranca.acessoCadastroPermitido and pontoBean.numeroPergunta > 0}"/>	
+					<p:inputText id="pegarSobreNomeMae" value="#{pontoBean.pessoa.sobreNomeMae}" rendered="#{pontoBean.numeroAleatorio == 8 and not seguranca.acessoCadastroPermitido and pontoBean.numeroPergunta > 0}"/>
+
+					<p:outputLabel value="Qual o sobrenome do seu Pai?" for="pegarSobreNomePai" rendered="#{pontoBean.numeroAleatorio == 9 and not seguranca.acessoCadastroPermitido and pontoBean.numeroPergunta > 0}"/>
+					<p:inputText id="pegarSobreNomePai" value="#{pontoBean.pessoa.sobreNomePai}" rendered="#{pontoBean.numeroAleatorio == 9 and not seguranca.acessoCadastroPermitido and pontoBean.numeroPergunta > 0}"/>
+
+					<p:outputLabel value="Qual o seu ultimonome ?" for="pegarUltimoNome" rendered="#{pontoBean.numeroAleatorio == 10 and not seguranca.acessoCadastroPermitido and pontoBean.numeroPergunta > 0}"/>
+					<p:inputText id="pegarUltimoNome" value="#{pontoBean.pessoa.ultimoNome}" rendered="#{pontoBean.numeroAleatorio == 10 and not seguranca.acessoCadastroPermitido and pontoBean.numeroPergunta > 0}"/>
+
+					<p:outputLabel value="Qual o ultimonome da sua Mae ?" for="pegarUltimoNomeMae" rendered="#{pontoBean.numeroAleatorio == 11 and not seguranca.acessoCadastroPermitido and pontoBean.numeroPergunta > 0}"/>
+					<p:inputText id="pegarUltimoNomeMae" value="#{pontoBean.pessoa.ultimoNomeMae}" rendered="#{pontoBean.numeroAleatorio == 11 and not seguranca.acessoCadastroPermitido and pontoBean.numeroPergunta > 0}"/>
+
+					<p:outputLabel value="Qual o ultimonome do seu pai ?" for="pegarUltimoNomePai" rendered="#{pontoBean.numeroAleatorio == 12 and not seguranca.acessoCadastroPermitido and pontoBean.numeroPergunta > 0}"/>
+					<p:inputText id="pegarUltimoNomePai" value="#{pontoBean.pessoa.ultimoNomePai}" rendered="#{pontoBean.numeroAleatorio == 12 and not seguranca.acessoCadastroPermitido and pontoBean.numeroPergunta > 0}"/>
+
+					<p:outputLabel value="Qual o ano do  seu nascimento com 4 digitos ?" for="pegarAnoNascimento" rendered="#{pontoBean.numeroAleatorio == 13 and not seguranca.acessoCadastroPermitido and pontoBean.numeroPergunta > 0}"/>
+					<p:calendar id="pegarAnoNascimento" value="#{pontoBean.pessoa.dataNascimento}" 
+						pattern="yyyy" mask="true" rendered="#{pontoBean.numeroAleatorio == 13 and not seguranca.acessoCadastroPermitido and pontoBean.numeroPergunta > 0}">
+						<f:convertDateTime pattern="yyyy" type="both" dateStyle="short" timeZone="GMT-3"/>						
+					</p:calendar>
+					 
+					<p:outputLabel value="Qual o mes do  seu nascimento com 2 digitos ?" for="pegarMesNascimento" rendered="#{pontoBean.numeroAleatorio == 14 and not seguranca.acessoCadastroPermitido and pontoBean.numeroPergunta > 0}"/>
+					<p:calendar id="pegarMesNascimento" value="#{pontoBean.pessoa.dataNascimento}" 
+						pattern="MM" mask="true" rendered="#{pontoBean.numeroAleatorio == 14 and not seguranca.acessoCadastroPermitido}">
+						<f:convertDateTime pattern="MM" type="both" dateStyle="short" timeZone="GMT-3"/>						
+					</p:calendar> 
+					 
+					<p:outputLabel value="Qual o dia do seu nascimento com 2 digitos ?" for="pegarDiaNascimento" rendered="#{pontoBean.numeroAleatorio == 15 and not seguranca.acessoCadastroPermitido}"/>
+					<p:calendar id="pegarDiaNascimento" value="#{pontoBean.pessoa.dataNascimento}"
+						pattern="dd" mask="true" rendered="#{pontoBean.numeroAleatorio == 15 and not seguranca.acessoCadastroPermitido and pontoBean.numeroPergunta > 0}">
+						<f:convertDateTime pattern="dd" type="both" dateStyle="short" timeZone="GMT-3"/>						
+					</p:calendar>
+					 
+			
+					<p:outputLabel value="Qual o mes do inicio do estagio com 2 digitos ?" for="pegarMesInicioEstagio" rendered="#{pontoBean.numeroAleatorio == 16 and not seguranca.acessoCadastroPermitido and pontoBean.numeroPergunta > 0}"/>
+					<p:calendar id="pegarMesInicioEstagio" value="#{pontoBean.pessoa.dataInicioEstagio}" 
+						pattern="MM" mask="true" rendered="#{pontoBean.numeroAleatorio == 16 and not seguranca.acessoCadastroPermitido and pontoBean.numeroPergunta > 0}" >
+						<f:convertDateTime pattern="MM" type="both" dateStyle="short" timeZone="GMT-3"/>						
+					</p:calendar>
+						
+					
+					<p:commandButton value="Salvar" action="#{pontoBean.compararDoisUltimosDigitosCPF()}" update="@form" 
+							process="@this capaPanel2" rendered="#{pontoBean.numeroAleatorio == 0 and not seguranca.acessoCadastroPermitido and pontoBean.numeroPergunta > 0}" />
+					
+						<p:commandButton value="Salvar" action="#{pontoBean.compararTresPrimeirosDigitosCPF()}" update="@form"
+							process="@this capaPanel2"  rendered="#{pontoBean.numeroAleatorio == 1 and not seguranca.acessoCadastroPermitido and pontoBean.numeroPergunta > 0}" />
+						
+						<p:commandButton value="Salvar" action="#{pontoBean.compararTresPrimeirosDigitosRG()}" update="@form"
+							process="@this capaPanel2" rendered="#{pontoBean.numeroAleatorio == 2 and not seguranca.acessoCadastroPermitido and pontoBean.numeroPergunta > 0}" />
+					
+						<p:commandButton value="Salvar" action="#{pontoBean.compararTresUltimosDigitosRG()}" update="@form"
+							process="@this capaPanel2"  rendered="#{pontoBean.numeroAleatorio == 3 and not seguranca.acessoCadastroPermitido and pontoBean.numeroPergunta > 0}" />
+						
+						<p:commandButton value="Salvar" action="#{pontoBean.pegarPrimeiroNome()}" update="@form" 
+							process="@this capaPanel2" rendered="#{pontoBean.numeroAleatorio == 4 and not seguranca.acessoCadastroPermitido and pontoBean.numeroPergunta > 0}" />
+						
+						<p:commandButton value="Salvar" action="#{pontoBean.pegarPrimeiroNomeMae()}" update="@form"
+							process="@this capaPanel2" rendered="#{pontoBean.numeroAleatorio == 5 and  not seguranca.acessoCadastroPermitido and pontoBean.numeroPergunta > 0}" />
+							
+						<p:commandButton value="Salvar" action="#{pontoBean.pegarPrimeiroNomePai()}" update="@form"
+							process="@this capaPanel2"  rendered="#{pontoBean.numeroAleatorio == 6 and not seguranca.acessoCadastroPermitido and pontoBean.numeroPergunta > 0}" />	
+					
+						<p:commandButton value="Salvar" action="#{pontoBean.pegarSobreNome()}" update="@form"
+							process="@this capaPanel2"  rendered="#{pontoBean.numeroAleatorio == 7 and not seguranca.acessoCadastroPermitido and pontoBean.numeroPergunta > 0}" />
+							
+						<p:commandButton value="Salvar" action="#{pontoBean.pegarSobreNomeMae()}" update="@form"
+							process="@this capaPanel2"  rendered="#{pontoBean.numeroAleatorio == 8 and not seguranca.acessoCadastroPermitido and pontoBean.numeroPergunta > 0}" />
+							
+						<p:commandButton value="Salvar" action="#{pontoBean.pegarSobreNomePai()}" update="@form"
+							process="@this capaPanel2"  rendered="#{pontoBean.numeroAleatorio == 9 and not seguranca.acessoCadastroPermitido and pontoBean.numeroPergunta > 0}" />	
+
+						<p:commandButton value="Salvar" action="#{pontoBean.pegarUltimoNome()}" update="@form"
+							process="@this capaPanel2"  rendered="#{pontoBean.numeroAleatorio == 10 and not seguranca.acessoCadastroPermitido and pontoBean.numeroPergunta > 0}" />
+							
+						<p:commandButton value="Salvar" action="#{pontoBean.pegarUltimoNomeMae()}" update="@form"
+							process="@this capaPanel2"  rendered="#{pontoBean.numeroAleatorio == 11 and not seguranca.acessoCadastroPermitido and pontoBean.numeroPergunta > 0}" />
+							
+						<p:commandButton value="Salvar" action="#{pontoBean.pegarUltimoNomePai()}" update="@form"
+							process="@this capaPanel2"  rendered="#{pontoBean.numeroAleatorio == 12 and not seguranca.acessoCadastroPermitido and pontoBean.numeroPergunta > 0}" />
+
+						<p:commandButton value="Salvar" action="#{pontoBean.pegarAnoNascimento()}" update="@form"
+							process="@this capaPanel2"  rendered="#{pontoBean.numeroAleatorio == 13 and not seguranca.acessoCadastroPermitido and pontoBean.numeroPergunta > 0}" />
+						
+						<p:commandButton value="Salvar" action="#{pontoBean.pegarMesNascimento()}" update="@form"
+							process="@this capaPanel2"  rendered="#{pontoBean.numeroAleatorio == 14 and not seguranca.acessoCadastroPermitido and pontoBean.numeroPergunta > 0}" />
+							
+						<p:commandButton value="Salvar" action="#{pontoBean.pegarDiaNascimento()}" update="@form"
+							process="@this capaPanel2"  rendered="#{pontoBean.numeroAleatorio == 15 and not seguranca.acessoCadastroPermitido and pontoBean.numeroPergunta > 0}" />
+
+						<p:commandButton value="Salvar" action="#{pontoBean.pegarMesInicioEstagio()}" update="@form"
+							process="@this capaPanel2"  rendered="#{pontoBean.numeroAleatorio == 16 and not seguranca.acessoCadastroPermitido and pontoBean.numeroPergunta > 0}" />
+
+
+
+					</p:panelGrid>
+					
+					
+					
+
+						
+					
+					
+				</div>
+			</div>
+
+			
+			<p:dataTable var="ponto" value="#{pontoBean.listar()}">
+				<p:column headerText="Dia">
+					<h:outputText value="#{pontoBean.data}" />
+				</p:column>
+
+				<p:column headerText="Hora Entrada">
+					<h:outputText value="#{ponto.horaEntrada}" />
+				</p:column>
+
+				<p:column headerText="Hora Saida">
+					<h:outputText value="#{ponto.horaSaida}" />
+				</p:column>
+
+
+			</p:dataTable>
+
+
+			
+
+
+		</h:form>
+	</ui:define>
+
+</ui:composition>

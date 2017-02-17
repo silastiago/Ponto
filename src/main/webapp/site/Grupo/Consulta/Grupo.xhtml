@@ -1,0 +1,64 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" 
+	template="/WEB-INF/template/Layout.xhtml">
+
+
+	<ui:define name="content">
+		<h1 class="aw-page-title">Grupos Cadastrados</h1>
+
+		<h:form id="frm">
+
+			<p:toolbar id="toolbar">
+				<p:toolbarGroup>
+					<p:commandButton value="Novo" icon="ui-icon-plus"
+						action="#{grupoBean.novo()}" process="@this"
+						disabled="#{not seguranca.acessoCadastroPermitido}"/>
+
+					<span class="ui-separator"> <span
+						class="ui-icon ui-icon-grip-dotted-vertical" />
+					</span>
+
+					<p:commandButton value="Editar" icon="ui-icon-pencil"
+						title="Editar" process="@this" action="#{grupoBean.edicao()}"
+						disabled="#{grupoBean.grupoSelecionado == null or not seguranca.acessoEdicaoPermitido}" />
+
+					<span class="ui-separator"> <span
+						class="ui-icon ui-icon-grip-dotted-vertical" />
+					</span>
+
+					<p:commandButton value="Excluir" icon="ui-icon-trash"
+						title="Excluir" process="@this" update="tabela_grupos toolbar"
+						action="#{grupoBean.excluir}"
+						disabled="#{grupoBean.grupoSelecionado == null or not seguranca.acessoRemocaoPermitido}"
+						onclick="if (!confirm('Deseja deletar o Grupo #{grupoBean.grupoSelecionado.nome} ? ')) return false" />
+
+				</p:toolbarGroup>
+			</p:toolbar>
+
+			<p:dataTable id="tabela_grupos" var="grupo"
+				value="#{grupoBean.listar()}" frame="box" rules="all"
+				cellpadding="3" width="100%" headerClass="cabecalho"
+				rowClasses="cor-sim, cor-nao" columnClasses="nome"
+				emptyMessage="Nenhum grupo Cadastrado"
+				selection="#{grupoBean.grupoSelecionado}" selectionMode="single"
+				rowKey="#{grupo.codigo}">
+
+				<p:ajax event="rowSelect" update=":frm:toolbar" />
+				<p:ajax event="rowUnselect" update=":frm:toolbar" />
+
+				<p:column filterBy="#{grupo.nome}"
+					style="text-align: center; width:5%" filterMatchMode="startsWith">
+					<f:facet name="header">
+						<h:outputText value="Grupo" />
+					</f:facet>
+					<h:outputText value="#{grupo.nome}" />
+				</p:column>
+
+			</p:dataTable>
+		</h:form>
+	</ui:define>
+
+</ui:composition>
