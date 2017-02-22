@@ -11,7 +11,6 @@ import pcrn.util.cdi.CDIServiceLocator;
 
 
 
-
 @FacesConverter(forClass = Delegacia.class)
 public class DelegaciaConversor implements Converter{
 

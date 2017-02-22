@@ -14,6 +14,13 @@
 	    		<p:toolbarGroup>
 	    			<p:commandButton value="Pesquisar" action="#{pontoBean.pesquisar}"
 	    				update="@form" />
+	    				
+	    			<p:separator />
+	    				
+	    			<p:commandButton value="Emitir Relatorio" action="#{pontoBean.emitir}" onclick="this.form.target='_blank'"
+	    				ajax="false" />
+	    			
+	    				
 	    		</p:toolbarGroup>
 	    	</p:toolbar>
 			

@@ -3,7 +3,9 @@ package pcrn.controller;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 import javax.annotation.PostConstruct;
@@ -14,8 +16,11 @@ import javax.faces.event.ValueChangeEvent;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.persistence.EntityManager;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
+import org.hibernate.Session;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 
 import pcrn.model.Data;
@@ -26,6 +31,7 @@ import pcrn.security.UsuarioSistema;
 import pcrn.service.DataService;
 import pcrn.service.PontoService;
 import pcrn.util.FacesUtil;
+import pcrn.util.report.ExecutorRelatorio;
 
 
 @Named
@@ -55,6 +61,15 @@ public class PontoBean implements Serializable{
 	@Inject
 	private HttpServletRequest request;
 
+	@Inject
+	private FacesContext facesContext;
+	
+	@Inject
+	private HttpServletResponse response;
+	
+	@Inject
+	private EntityManager manager;
+	
 	@Inject
 	private PontoService pontoService;
 
@@ -89,7 +104,6 @@ public class PontoBean implements Serializable{
 			dataService.salvar(data);
 			id_data = dataService.listarData(dt);
 		}
-
 		data = dataService.porCodigo(id_data);
 
 		String nome = "";
@@ -178,6 +192,57 @@ public class PontoBean implements Serializable{
 	}
 
 
+	public void emitir() {
+		Map<String, Object> parametros = new HashMap<>();
+		ExecutorRelatorio executor = null;
+		
+		int id_data_de = dataService.listarData(dataCriacaoDe);
+		int id_data_ate = dataService.listarData(dataCriacaoAte);
+
+		filtro.setDataCriacaoDe(id_data_de);
+		filtro.setDataCriacaoAte(id_data_ate);
+
+		if (filtro.getPessoa() == null) {
+			
+			if (criterio.equals("data")) {
+				parametros.put("codigo_data", filtro.getDataCriacaoDe());
+				executor = new ExecutorRelatorio("/relatorios/PontoDataEspecificaTodosUsuarios.jasper",
+						this.response, parametros, "relatorios.pdf");
+			}else if (criterio.equals("datas")) {
+				parametros.put("codigo_data_de", filtro.getDataCriacaoDe());
+				parametros.put("codigo_data_ate", filtro.getDataCriacaoAte());
+				executor = new ExecutorRelatorio("/relatorios/PontoEntreDatasTodosUsuarios.jasper",
+						this.response, parametros, "relatorios.pdf");
+			}
+			
+		}else{
+			
+			if (criterio.equals("data")) {
+				
+				parametros.put("codigo_data", filtro.getDataCriacaoDe());
+				parametros.put("codigo_pessoa", filtro.getPessoa().getCodigo());
+				executor = new ExecutorRelatorio("/relatorios/PontoDataEspecificaUsuario.jasper",
+						this.response, parametros, "relatorios.pdf");
+				
+			}else if (criterio.equals("datas")) {
+				parametros.put("codigo_pessoa", filtro.getPessoa().getCodigo());
+				parametros.put("codigo_data_de", filtro.getDataCriacaoDe());
+				parametros.put("codigo_data_ate", filtro.getDataCriacaoAte());
+				executor = new ExecutorRelatorio("/relatorios/PontoEntreDatasUsuario.jasper",
+						this.response, parametros, "relatorios.pdf");
+			}
+		}		
+		
+		Session session = manager.unwrap(Session.class);
+		session.doWork(executor);
+		
+		if (executor.isRelatorioGerado()) {
+			facesContext.responseComplete();
+		} else {
+			FacesUtil.addErrorMessage("A execução do relatório não retornou dados.");
+		}
+	}
+	
 
 	public List<Ponto> listar(){
 		listaPontos = pontoService.listar(pessoaLogada);
@@ -592,6 +657,8 @@ public class PontoBean implements Serializable{
 
 	}
 
+	
+	
 	public int getNumeroPergunta() {
 		return numeroPergunta;
 	}
