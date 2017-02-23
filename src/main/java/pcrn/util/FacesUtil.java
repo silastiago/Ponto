@@ -87,6 +87,7 @@ public class FacesUtil {
 
 		if (minutos < 0 ) {
 			minutos += 60;
+			horas -= 1;
 		}
 
 		horasTrabalhadas = String.format( "%02d:%02d", horas, minutos ) ;
