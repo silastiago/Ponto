@@ -50,16 +50,14 @@
 					<p:inputText id="ultimonome" value="#{pessoaBean.pessoa.ultimoNome}" />
 					
 					<p:outputLabel value="Data de Nascimento" for="nascimento" />
-					<p:calendar id="nascimento" value="#{pessoaBean.pessoa.dataNascimento}" 
-						pattern="dd/MM/yyyy" mask="true" navigator="true" showOn="button">
-						<f:convertDateTime pattern="dd/MM/yyyy" type="both" dateStyle="short" timeZone="GMT-3"/>						
-					</p:calendar>
+					<p:inputMask id="nascimento" value="#{pessoaBean.pessoa.dataNascimento}" placeholder="dd/mm/yyyy" mask="99/99/9999">
+						<f:convertDateTime pattern="dd/MM/yyyy" type="both" dateStyle="short" timeZone="GMT-3"/>
+					</p:inputMask>
 					
 					<p:outputLabel value="Data de Inicio Estagio" for="estagio" />
-					<p:calendar id="estagio" value="#{pessoaBean.pessoa.dataInicioEstagio}" 
-						pattern="dd/MM/yyyy" mask="true" navigator="true" showOn="button">
-						<f:convertDateTime pattern="dd/MM/yyyy" type="both" dateStyle="short" timeZone="GMT-3"/>						
-					</p:calendar>
+					<p:inputMask id="estagio" value="#{pessoaBean.pessoa.dataInicioEstagio}" placeholder="dd/mm/yyyy" mask="99/99/9999">
+						<f:convertDateTime pattern="dd/MM/yyyy" type="both" dateStyle="short" timeZone="GMT-3"/>
+					</p:inputMask>
 					
 					<p:outputLabel value="Nome do Pai" for="nomepai" />
 					<p:inputText id="nomepai" value="#{pessoaBean.pessoa.nomePai}" />
