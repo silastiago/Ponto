@@ -35,8 +35,8 @@
 					<f:ajax event="change" render="valor"/>
 				</p:selectOneMenu>
 	    	
-	    		<p:outputLabel value="Estagiario" for="estagiario" />
-				<p:selectOneMenu id="estagiario" value="#{pontoBean.filtro.pessoa}" label="Estagiario">
+	    		<p:outputLabel value="Estagiario" for="estagiario" rendered="#{seguranca.acessoCadastroPermitido}"/>
+				<p:selectOneMenu id="estagiario" value="#{pontoBean.filtro.pessoa}" label="Estagiario" rendered="#{seguranca.acessoCadastroPermitido}">
 					<f:selectItem itemLabel="Selecione o Estagiario" />
 					<f:selectItems value="#{pessoaBean.listar()}" var="estagiario" itemValue="#{estagiario}" itemLabel="#{estagiario.nome}" />
 				</p:selectOneMenu>

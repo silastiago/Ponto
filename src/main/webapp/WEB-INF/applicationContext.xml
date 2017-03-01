@@ -67,7 +67,7 @@
 		<intercept-url pattern="/site/Pessoa/MudarSenha/**" access="isAuthenticated()" />
 		
 		<intercept-url pattern="/site/Ponto/Novo/**" access="hasAnyRole('ADMINISTRADOR', 'ESTAGIARIO')" />
-		<intercept-url pattern="/site/Ponto/Consulta/**" access="hasAnyRole('ADMINISTRADOR')" />
+		<intercept-url pattern="/site/Ponto/Consulta/**" access="hasAnyRole('ADMINISTRADOR', 'ESTAGIARIO')" />
 		<intercept-url pattern="/**" access="denyAll" />
 
 		

@@ -198,38 +198,62 @@ public class PontoBean implements Serializable{
 		
 		int id_data_de = dataService.listarData(dataCriacaoDe);
 		int id_data_ate = dataService.listarData(dataCriacaoAte);
-
+		
 		filtro.setDataCriacaoDe(id_data_de);
 		filtro.setDataCriacaoAte(id_data_ate);
 
 		if (filtro.getPessoa() == null) {
 			
+			Pessoa pessoa = this.getUsuarioLogado().getPessoa();
+			
 			if (criterio.equals("data")) {
-				parametros.put("codigo_data", filtro.getDataCriacaoDe());
-				executor = new ExecutorRelatorio("/relatorios/PontoDataEspecificaTodosUsuarios.jasper",
-						this.response, parametros, "relatorios.pdf");
+				if (pessoa.getGrupos().contains("ADMINISTRADOR")) {
+					parametros.put("codigo_data", filtro.getDataCriacaoDe());
+					executor = new ExecutorRelatorio("/relatorios/PontoDataEspecificaTodosUsuarios.jasper",
+							this.response, parametros, "relatorios.pdf");
+					
+				}else{
+					filtro.setPessoa(pessoa);
+					parametros.put("codigo_data", filtro.getDataCriacaoDe());
+					parametros.put("codigo_pessoa", filtro.getPessoa().getCodigo());
+					executor = new ExecutorRelatorio("/relatorios/PontoDataEspecificaUsuario.jasper",
+							this.response, parametros, "relatorios.pdf");
+				}	
+					
 			}else if (criterio.equals("datas")) {
-				parametros.put("codigo_data_de", filtro.getDataCriacaoDe());
-				parametros.put("codigo_data_ate", filtro.getDataCriacaoAte());
-				executor = new ExecutorRelatorio("/relatorios/PontoEntreDatasTodosUsuarios.jasper",
-						this.response, parametros, "relatorios.pdf");
+				if (pessoa.getGrupos().contains("ADMINISTRADOR")) {
+					parametros.put("codigo_data_de", filtro.getDataCriacaoDe());
+					parametros.put("codigo_data_ate", filtro.getDataCriacaoAte());
+					executor = new ExecutorRelatorio("/relatorios/PontoEntreDatasTodosUsuarios.jasper",
+							this.response, parametros, "relatorios.pdf");
+					
+				}else{
+					filtro.setPessoa(pessoa);
+					parametros.put("codigo_pessoa", filtro.getPessoa().getCodigo());
+					parametros.put("codigo_data_de", filtro.getDataCriacaoDe());
+					parametros.put("codigo_data_ate", filtro.getDataCriacaoAte());
+					executor = new ExecutorRelatorio("/relatorios/PontoEntreDatasUsuario.jasper",
+							this.response, parametros, "relatorios.pdf");
+				}
 			}
 			
 		}else{
 			
 			if (criterio.equals("data")) {
-				
-				parametros.put("codigo_data", filtro.getDataCriacaoDe());
-				parametros.put("codigo_pessoa", filtro.getPessoa().getCodigo());
-				executor = new ExecutorRelatorio("/relatorios/PontoDataEspecificaUsuario.jasper",
-						this.response, parametros, "relatorios.pdf");
+					parametros.put("codigo_data", filtro.getDataCriacaoDe());
+					parametros.put("codigo_pessoa", filtro.getPessoa().getCodigo());
+					executor = new ExecutorRelatorio("/relatorios/PontoDataEspecificaUsuario.jasper",
+							this.response, parametros, "relatorios.pdf");
 				
 			}else if (criterio.equals("datas")) {
-				parametros.put("codigo_pessoa", filtro.getPessoa().getCodigo());
-				parametros.put("codigo_data_de", filtro.getDataCriacaoDe());
-				parametros.put("codigo_data_ate", filtro.getDataCriacaoAte());
-				executor = new ExecutorRelatorio("/relatorios/PontoEntreDatasUsuario.jasper",
-						this.response, parametros, "relatorios.pdf");
+					
+						parametros.put("codigo_pessoa", filtro.getPessoa().getCodigo());
+						parametros.put("codigo_data_de", filtro.getDataCriacaoDe());
+						parametros.put("codigo_data_ate", filtro.getDataCriacaoAte());
+						executor = new ExecutorRelatorio("/relatorios/PontoEntreDatasUsuario.jasper",
+								this.response, parametros, "relatorios.pdf");
+						
+					
 			}
 		}		
 		
@@ -264,24 +288,39 @@ public class PontoBean implements Serializable{
 	public void pesquisar() {
 		int id_data_de = dataService.listarData(dataCriacaoDe);
 		int id_data_ate = dataService.listarData(dataCriacaoAte);
-
+		
+		
 		filtro.setDataCriacaoDe(id_data_de);
 		filtro.setDataCriacaoAte(id_data_ate);
 
 		if (filtro.getPessoa() == null) {
+			Pessoa pessoa = this.getUsuarioLogado().getPessoa();
 			
 			if (criterio.equals("data")) {
-				pontosFiltrados = pontoService.listarPontoDataEspecifica(filtro);
+				if (pessoa.getGrupos().contains("ADMINISTRADOR")) {				
+					pontosFiltrados = pontoService.listarPontoDataEspecifica(filtro);
+				}else{
+					filtro.setPessoa(pessoa);
+					pontosFiltrados = pontoService.listarPontoDataEspecificaUsuario(filtro);
+				}
+						
+						
 			}else if (criterio.equals("datas")) {
-				pontosFiltrados = pontoService.listarPontosEntreDatas(filtro);
+					if (pessoa.getGrupos().contains("ADMINISTRADOR")) {
+							pontosFiltrados = pontoService.listarPontosEntreDatas(filtro);
+					}else{
+						filtro.setPessoa(pessoa);
+						pontosFiltrados = pontoService.listarPontosEntreDatasUsuario(filtro);	
+					}							
 			}
 			
 		}else{
 			
 			if (criterio.equals("data")) {
-				pontosFiltrados = pontoService.listarPontoDataEspecificaUsuario(filtro);
+					pontosFiltrados = pontoService.listarPontoDataEspecificaUsuario(filtro);
+					
 			}else if (criterio.equals("datas")) {
-				pontosFiltrados = pontoService.listarPontosEntreDatasUsuario(filtro);
+					pontosFiltrados = pontoService.listarPontosEntreDatasUsuario(filtro);
 			}
 		}
 	}
