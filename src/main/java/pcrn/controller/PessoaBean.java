@@ -7,6 +7,7 @@ import java.util.List;
 
 import javax.faces.view.ViewScoped;
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
@@ -89,14 +90,7 @@ public class PessoaBean implements Serializable{
 		this.pessoa.setSenha(FacesUtil.md5(senha));
 		pessoaService.salvar(pessoa);
 
-		FacesContext fc = FacesContext.getCurrentInstance();
-
-		try {
-			fc.getExternalContext().redirect("../Consulta/Pessoa.xhtml");
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		FacesContext.getCurrentInstance().addMessage("message" , new FacesMessage(FacesMessage.SEVERITY_INFO, "","Senha alterada com sucesso"));
 	}
 
 	public void alterarSenha() {
@@ -104,15 +98,8 @@ public class PessoaBean implements Serializable{
 		String senha = this.pessoa.getSenha();
 		this.pessoa.setSenha(FacesUtil.md5(senha));
 		pessoaService.salvar(pessoa);
-
-		FacesContext fc = FacesContext.getCurrentInstance();
-
-		try {
-			fc.getExternalContext().redirect("../Consulta/Pessoa.xhtml");
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		
+		FacesContext.getCurrentInstance().addMessage("message" , new FacesMessage(FacesMessage.SEVERITY_INFO, "","Senha alterada com sucesso"));
 	}
 	
 	private UsuarioSistema getUsuarioLogado() {
