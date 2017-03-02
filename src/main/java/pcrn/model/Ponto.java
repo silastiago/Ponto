@@ -93,6 +93,7 @@ public class Ponto implements Serializable{
 	public void setSituacaoPonto(String situacaoPonto) {
 		this.situacaoPonto = situacaoPonto;
 	}
+	
 	@ManyToOne
 	@JoinColumn(name="codigo_pessoa", referencedColumnName="codigo")
 	public Pessoa getPessoa() {

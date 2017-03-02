@@ -14,8 +14,8 @@
 				<p:toolbarGroup>
 					
 					<p:commandButton value="Consulta" icon="ui-icon-search"
-						action="#{pontoBean.consulta()}" process="@this" />
-						<!-- disabled="#{not seguranca.acessoCadastroPermitido}"  -->
+						action="#{pontoBean.consulta()}" process="@this" 
+						 rendered="#{seguranca.acessoCadastroPermitido}" /> 
 						
 
 					<span class="ui-separator"> <span

@@ -35,23 +35,6 @@
 	
 		<intercept-url pattern="/Home.xhtml" access="isAuthenticated()" />
 		<intercept-url pattern="/AcessoNegado.xhtml" access="isAuthenticated()" />
-		<intercept-url pattern="/pegarDoisUltimosDigitosCPF.xhtml" access="isAuthenticated()" />
-		<intercept-url pattern="/pegarTresPrimeirosDigitosCPF.xhtml" access="isAuthenticated()" />
-		<intercept-url pattern="/pegarTresPrimeirosDigitosRG.xhtml" access="isAuthenticated()" />
-		<intercept-url pattern="/pegarTresUltimosDigitosRG.xhtml" access="isAuthenticated()" />
-		<intercept-url pattern="/pegarPrimeiroNome.xhtml" access="isAuthenticated()" />
-		<intercept-url pattern="/pegarPrimeiroNomeMae.xhtml" access="isAuthenticated()" />
-		<intercept-url pattern="/pegarPrimeiroNomePai.xhtml" access="isAuthenticated()" />
-		<intercept-url pattern="/pegarSobreNome.xhtml" access="isAuthenticated()" />
-		<intercept-url pattern="/pegarSobreNomeMae.xhtml" access="isAuthenticated()" />
-		<intercept-url pattern="/pegarSobreNomePai.xhtml" access="isAuthenticated()" />
-		<intercept-url pattern="/pegarUltimoNome.xhtml" access="isAuthenticated()" />
-		<intercept-url pattern="/pegarUltimoNomeMae.xhtml" access="isAuthenticated()" />
-		<intercept-url pattern="/pegarUltimoNomePai.xhtml" access="isAuthenticated()" />
-		<intercept-url pattern="/pegarAnoNascimento.xhtml" access="isAuthenticated()" />
-		<intercept-url pattern="/pegarMesNascimento.xhtml" access="isAuthenticated()" />
-		<intercept-url pattern="/pegarDiaNascimento.xhtml" access="isAuthenticated()" />
-		<intercept-url pattern="/pegarMesInicioEstagio.xhtml" access="isAuthenticated()" />
 		
 		<intercept-url pattern="/site/Delegacia/Consulta/**" access="hasAnyRole('ADMINISTRADOR')"  />
 		<intercept-url pattern="/site/Delegacia/Edicao/**" access="hasAnyRole('ADMINISTRADOR')" />
@@ -67,7 +50,7 @@
 		<intercept-url pattern="/site/Pessoa/MudarSenha/**" access="isAuthenticated()" />
 		
 		<intercept-url pattern="/site/Ponto/Novo/**" access="hasAnyRole('ADMINISTRADOR', 'ESTAGIARIO')" />
-		<intercept-url pattern="/site/Ponto/Consulta/**" access="hasAnyRole('ADMINISTRADOR', 'ESTAGIARIO')" />
+		<intercept-url pattern="/site/Ponto/Consulta/**" access="hasAnyRole('ADMINISTRADOR')" />
 		<intercept-url pattern="/**" access="denyAll" />
 
 		
