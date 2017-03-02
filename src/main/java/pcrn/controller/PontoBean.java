@@ -207,33 +207,41 @@ public class PontoBean implements Serializable{
 			Pessoa pessoa = this.getUsuarioLogado().getPessoa();
 			
 			if (criterio.equals("data")) {
-				if (pessoa.getGrupos().contains("ADMINISTRADOR")) {
+				for (int i = 0; i < pessoa.getGrupos().size(); i++) {					
+					
+					if (pessoa.getGrupos().get(i).getNome().contains("ADMINISTRADOR")) {
 					parametros.put("codigo_data", filtro.getDataCriacaoDe());
 					executor = new ExecutorRelatorio("/relatorios/PontoDataEspecificaTodosUsuarios.jasper",
 							this.response, parametros, "relatorios.pdf");
 					
-				}else{
-					filtro.setPessoa(pessoa);
-					parametros.put("codigo_data", filtro.getDataCriacaoDe());
-					parametros.put("codigo_pessoa", filtro.getPessoa().getCodigo());
-					executor = new ExecutorRelatorio("/relatorios/PontoDataEspecificaUsuario.jasper",
-							this.response, parametros, "relatorios.pdf");
-				}	
+					}else{
+						filtro.setPessoa(pessoa);
+						parametros.put("codigo_data", filtro.getDataCriacaoDe());
+						parametros.put("codigo_pessoa", filtro.getPessoa().getCodigo());
+						executor = new ExecutorRelatorio("/relatorios/PontoDataEspecificaUsuario.jasper",
+								this.response, parametros, "relatorios.pdf");
+					}	
+					
+				}
 					
 			}else if (criterio.equals("datas")) {
-				if (pessoa.getGrupos().contains("ADMINISTRADOR")) {
-					parametros.put("codigo_data_de", filtro.getDataCriacaoDe());
-					parametros.put("codigo_data_ate", filtro.getDataCriacaoAte());
-					executor = new ExecutorRelatorio("/relatorios/PontoEntreDatasTodosUsuarios.jasper",
-							this.response, parametros, "relatorios.pdf");
+				for (int i = 0; i < pessoa.getGrupos().size(); i++) {					
 					
-				}else{
-					filtro.setPessoa(pessoa);
-					parametros.put("codigo_pessoa", filtro.getPessoa().getCodigo());
-					parametros.put("codigo_data_de", filtro.getDataCriacaoDe());
-					parametros.put("codigo_data_ate", filtro.getDataCriacaoAte());
-					executor = new ExecutorRelatorio("/relatorios/PontoEntreDatasUsuario.jasper",
-							this.response, parametros, "relatorios.pdf");
+					if (pessoa.getGrupos().get(i).getNome().contains("ADMINISTRADOR")) {
+					
+						parametros.put("codigo_data_de", filtro.getDataCriacaoDe());
+						parametros.put("codigo_data_ate", filtro.getDataCriacaoAte());
+						executor = new ExecutorRelatorio("/relatorios/PontoEntreDatasTodosUsuarios.jasper",
+								this.response, parametros, "relatorios.pdf");
+					
+					}else{
+						filtro.setPessoa(pessoa);
+						parametros.put("codigo_pessoa", filtro.getPessoa().getCodigo());
+						parametros.put("codigo_data_de", filtro.getDataCriacaoDe());
+						parametros.put("codigo_data_ate", filtro.getDataCriacaoAte());
+						executor = new ExecutorRelatorio("/relatorios/PontoEntreDatasUsuario.jasper",
+								this.response, parametros, "relatorios.pdf");
+					}
 				}
 			}
 			
@@ -294,24 +302,31 @@ public class PontoBean implements Serializable{
 		filtro.setDataCriacaoAte(id_data_ate);
 
 		if (filtro.getPessoa() == null) {
-			Pessoa pessoa = this.getUsuarioLogado().getPessoa();
+			Pessoa pessoa = this.getUsuarioLogado().getPessoa();			
 			
 			if (criterio.equals("data")) {
-				if (pessoa.getGrupos().contains("ADMINISTRADOR")) {				
+				
+				for (int i = 0; i < pessoa.getGrupos().size(); i++) {					
+				
+				if (pessoa.getGrupos().get(i).getNome().contains("ADMINISTRADOR")) {				
 					pontosFiltrados = pontoService.listarPontoDataEspecifica(filtro);
+					
 				}else{
 					filtro.setPessoa(pessoa);
 					pontosFiltrados = pontoService.listarPontoDataEspecificaUsuario(filtro);
 				}
-						
+			}			
 						
 			}else if (criterio.equals("datas")) {
-					if (pessoa.getGrupos().contains("ADMINISTRADOR")) {
+				for (int i = 0; i < pessoa.getGrupos().size(); i++) {					
+					
+					if (pessoa.getGrupos().get(i).getNome().contains("ADMINISTRADOR")) {
 							pontosFiltrados = pontoService.listarPontosEntreDatas(filtro);
 					}else{
 						filtro.setPessoa(pessoa);
 						pontosFiltrados = pontoService.listarPontosEntreDatasUsuario(filtro);	
 					}							
+				}
 			}
 			
 		}else{
@@ -658,7 +673,10 @@ public class PontoBean implements Serializable{
 
 		diaNascimentoDigitadosPeloUsuario  = FacesUtil.pegarDiaData(this.pessoa.getDataNascimento());
 		diaNascimento = FacesUtil.pegarDiaData(pessoaLogada.getDataNascimento());
-
+		System.out.println("Dia de Nascimento: "+ diaNascimento);
+		System.out.println("Dia de Nascimento Digitado pelo usuario: "+ diaNascimentoDigitadosPeloUsuario);
+		
+		
 		if (diaNascimento.equals(diaNascimentoDigitadosPeloUsuario)) {
 
 			FacesContext.getCurrentInstance().addMessage("message" , new FacesMessage(FacesMessage.SEVERITY_INFO, "","Resposta Correta"));

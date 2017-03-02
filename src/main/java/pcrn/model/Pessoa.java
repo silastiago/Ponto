@@ -14,6 +14,8 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotEmpty;
@@ -135,6 +137,7 @@ public class Pessoa implements Serializable{
 		this.ultimoNome = ultimoNome;
 	}
 	
+	@Temporal(value=TemporalType.DATE)
 	@Column(name="data_nascimento")
 	public Date getDataNascimento() {
 		return dataNascimento;

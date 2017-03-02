@@ -112,12 +112,11 @@
 						<f:convertDateTime pattern="MM" type="both" dateStyle="short" timeZone="GMT-3"/>						
 					</p:calendar> 
 					 
-					<p:outputLabel value="Qual o dia do seu nascimento com 2 digitos ?" for="pegarDiaNascimento" rendered="#{pontoBean.numeroAleatorio == 15 and not seguranca.acessoCadastroPermitido}"/>
+					<p:outputLabel value="Qual o dia do seu nascimento com 2 digitos ?" for="pegarDiaNascimento" rendered="#{pontoBean.numeroAleatorio == 15 and not seguranca.acessoCadastroPermitido and pontoBean.numeroPergunta > 0}"/>
 					<p:calendar id="pegarDiaNascimento" value="#{pontoBean.pessoa.dataNascimento}"
 						pattern="dd" mask="true" rendered="#{pontoBean.numeroAleatorio == 15 and not seguranca.acessoCadastroPermitido and pontoBean.numeroPergunta > 0}">
 						<f:convertDateTime pattern="dd" type="both" dateStyle="short" timeZone="GMT-3"/>						
-					</p:calendar>
-					 
+					</p:calendar>	 
 			
 					<p:outputLabel value="Qual o mes do inicio do estagio com 2 digitos ?" for="pegarMesInicioEstagio" rendered="#{pontoBean.numeroAleatorio == 16 and not seguranca.acessoCadastroPermitido and pontoBean.numeroPergunta > 0}"/>
 					<p:calendar id="pegarMesInicioEstagio" value="#{pontoBean.pessoa.dataInicioEstagio}" 

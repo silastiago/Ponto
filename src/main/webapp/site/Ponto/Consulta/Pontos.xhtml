@@ -37,7 +37,7 @@
 	    	
 	    		<p:outputLabel value="Estagiario" for="estagiario" rendered="#{seguranca.acessoCadastroPermitido}"/>
 				<p:selectOneMenu id="estagiario" value="#{pontoBean.filtro.pessoa}" label="Estagiario" rendered="#{seguranca.acessoCadastroPermitido}">
-					<f:selectItem itemLabel="Selecione o Estagiario" />
+					<f:selectItem itemLabel="Selecione o Estagiario" itemValue=""/>
 					<f:selectItems value="#{pessoaBean.listar()}" var="estagiario" itemValue="#{estagiario}" itemLabel="#{estagiario.nome}" />
 				</p:selectOneMenu>
 	    	
@@ -58,7 +58,7 @@
 	    	
 	    	
 	    	<p:dataTable id="pontosTable" value="#{pontoBean.pontosFiltrados}" var="ponto"
-		    		style="margin-top: 20px" emptyMessage="Nenhum pedido encontrado."
+		    		style="margin-top: 20px" emptyMessage="Nenhum ponto encontrado"
 		    		rows="20" paginator="true" paginatorAlwaysVisible="false" paginatorPosition="bottom">
 	    		
 	    		<p:column headerText="Nome">
