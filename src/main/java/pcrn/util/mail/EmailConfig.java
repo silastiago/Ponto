@@ -45,7 +45,6 @@ public class EmailConfig {
 		File file = new File(caminhoRelatorio);
 		String dataAtual = FacesUtil.retornaDataAtual();
 		
-		//"estagiospcrn@gmail.com"
 		message.to("fulano@gmail.com")
 				.subject("Relatorio dos Estagiários")
 				.bodyHtml("<strong> Segue em anexo o relatorio de Ponto dos estagiários do Dia: "+ dataAtual+"</strong>")

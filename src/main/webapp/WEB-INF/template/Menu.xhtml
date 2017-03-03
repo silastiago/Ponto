@@ -10,11 +10,12 @@
 			</li>
 			
 			<li>
-				<h:link outcome="/site/Pessoa/Consulta/Pessoa"><i class="fa  fa-fw  fa-user"></i>Usuario</h:link>
+				<h:link outcome="/site/Pessoa/Consulta/Pessoa" rendered="#{seguranca.acessoCadastroPermitido}">
+					<i class="fa  fa-fw  fa-user"></i>Usuario</h:link>
 			</li>
 			
 			<li>
-				<h:link outcome="/site/Pessoa/MudarSenha/MudarSenha"><i class="fa  fa-fw  fa-user"></i>Mudar Sua Senha</h:link>
+				<h:link outcome="/site/Pessoa/MudarSenha/MudarSenha" ><i class="fa  fa-fw  fa-user"></i>Mudar Sua Senha</h:link>
 			</li>
 			
 			<!-- 
@@ -24,7 +25,8 @@
 			 -->
 			
 			<li>
-				<h:link outcome="/site/Delegacia/Consulta/Delegacia"><i class="fa  fa-fw  fa-cog"></i>Delegacia</h:link>
+				<h:link outcome="/site/Delegacia/Consulta/Delegacia" rendered="#{seguranca.acessoCadastroPermitido}">
+					<i class="fa  fa-fw  fa-cog"></i>Delegacia</h:link>
 			</li>
 			
 			<li>
