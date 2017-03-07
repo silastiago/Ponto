@@ -120,7 +120,7 @@ public class Pessoa implements Serializable{
 		return nome;
 	}
 	public void setNome(String nome) {
-		this.nome = nome;
+		this.nome = nome.toUpperCase();
 	}
 	
 	@Column(name="sobre_nome")
@@ -128,7 +128,7 @@ public class Pessoa implements Serializable{
 		return sobreNome;
 	}
 	public void setSobreNome(String sobreNome) {
-		this.sobreNome = sobreNome;
+		this.sobreNome = sobreNome.toUpperCase();
 	}
 	
 	@NotEmpty(message = "Ultimo nome deve ser informado")
@@ -137,7 +137,7 @@ public class Pessoa implements Serializable{
 		return ultimoNome;
 	}
 	public void setUltimoNome(String ultimoNome) {
-		this.ultimoNome = ultimoNome;
+		this.ultimoNome = ultimoNome.toUpperCase();
 	}
 	
 	@Temporal(value=TemporalType.DATE)
@@ -188,7 +188,7 @@ public class Pessoa implements Serializable{
 		return nomeMae;
 	}
 	public void setNomeMae(String nomeMae) {
-		this.nomeMae = nomeMae;
+		this.nomeMae = nomeMae.toUpperCase();
 	}
 	
 	@Column(name="sobre_nome_mae")
@@ -196,7 +196,7 @@ public class Pessoa implements Serializable{
 		return sobreNomeMae;
 	}
 	public void setSobreNomeMae(String sobreNomeMae) {
-		this.sobreNomeMae = sobreNomeMae;
+		this.sobreNomeMae = sobreNomeMae.toUpperCase();
 	}
 	
 	@NotEmpty(message = "Ultimonome da mae deve ser informado")
@@ -205,7 +205,7 @@ public class Pessoa implements Serializable{
 		return ultimoNomeMae;
 	}
 	public void setUltimoNomeMae(String ultimoNomeMae) {
-		this.ultimoNomeMae = ultimoNomeMae;
+		this.ultimoNomeMae = ultimoNomeMae.toUpperCase();
 	}
 	@NotNull(message = "Grupo deve ser informado")
 	@ManyToMany(fetch=FetchType.LAZY)

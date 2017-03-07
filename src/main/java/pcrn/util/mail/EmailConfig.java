@@ -45,7 +45,7 @@ public class EmailConfig {
 		File file = new File(caminhoRelatorio);
 		String dataAtual = FacesUtil.retornaDataAtual();
 		
-		message.to("fulano@gmail.com")
+		message.to("estagiospcrn@gmail.com")
 				.subject("Relatorio dos Estagiários")
 				.bodyHtml("<strong> Segue em anexo o relatorio de Ponto dos estagiários do Dia: "+ dataAtual+"</strong>")
 				.addAttachment(ContentDisposition.ATTACHMENT, file)
