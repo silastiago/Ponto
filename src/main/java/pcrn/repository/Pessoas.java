@@ -53,7 +53,7 @@ public class Pessoas implements Serializable, IPessoa{
 	@SuppressWarnings("unchecked")
 	public List<Pessoa> listar() {
 		List<Pessoa> listaPessoa = null;
-		Query query = manager.createQuery("Select c from Pessoa c order by codigo asc");
+		Query query = manager.createQuery("Select c from Pessoa c order by login asc");
 		listaPessoa = query.getResultList();
 		return listaPessoa;
 	}

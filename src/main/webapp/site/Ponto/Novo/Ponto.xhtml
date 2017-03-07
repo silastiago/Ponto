@@ -15,8 +15,7 @@
 					
 					<p:commandButton value="Consulta" icon="ui-icon-search"
 						action="#{pontoBean.consulta()}" process="@this" 
-						 rendered="#{seguranca.acessoCadastroPermitido}" /> 
-						
+						 rendered="#{seguranca.acessoCadastroPermitido}" />
 
 					<span class="ui-separator"> <span
 						class="ui-icon ui-icon-grip-dotted-vertical" />
@@ -24,8 +23,6 @@
 
 				</p:toolbarGroup>
 			</p:toolbar>
-			
-				
 
 			<div class="ui-fluid">
 				<div class="ui-box">
@@ -128,69 +125,67 @@
 					<p:commandButton value="Salvar" action="#{pontoBean.compararDoisUltimosDigitosCPF()}" update="@form" 
 							process="@this capaPanel2" rendered="#{pontoBean.numeroAleatorio == 0 and not seguranca.acessoCadastroPermitido and pontoBean.numeroPergunta > 0}" />
 					
-						<p:commandButton value="Salvar" action="#{pontoBean.compararTresPrimeirosDigitosCPF()}" update="@form"
+					<p:commandButton value="Salvar" action="#{pontoBean.compararTresPrimeirosDigitosCPF()}" update="@form"
 							process="@this capaPanel2"  rendered="#{pontoBean.numeroAleatorio == 1 and not seguranca.acessoCadastroPermitido and pontoBean.numeroPergunta > 0}" />
 						
-						<p:commandButton value="Salvar" action="#{pontoBean.compararTresPrimeirosDigitosRG()}" update="@form"
+					<p:commandButton value="Salvar" action="#{pontoBean.compararTresPrimeirosDigitosRG()}" update="@form"
 							process="@this capaPanel2" rendered="#{pontoBean.numeroAleatorio == 2 and not seguranca.acessoCadastroPermitido and pontoBean.numeroPergunta > 0}" />
 					
-						<p:commandButton value="Salvar" action="#{pontoBean.compararTresUltimosDigitosRG()}" update="@form"
+					<p:commandButton value="Salvar" action="#{pontoBean.compararTresUltimosDigitosRG()}" update="@form"
 							process="@this capaPanel2"  rendered="#{pontoBean.numeroAleatorio == 3 and not seguranca.acessoCadastroPermitido and pontoBean.numeroPergunta > 0}" />
 						
-						<p:commandButton value="Salvar" action="#{pontoBean.pegarPrimeiroNome()}" update="@form" 
+					<p:commandButton value="Salvar" action="#{pontoBean.pegarPrimeiroNome()}" update="@form" 
 							process="@this capaPanel2" rendered="#{pontoBean.numeroAleatorio == 4 and not seguranca.acessoCadastroPermitido and pontoBean.numeroPergunta > 0}" />
 						
-						<p:commandButton value="Salvar" action="#{pontoBean.pegarPrimeiroNomeMae()}" update="@form"
+					<p:commandButton value="Salvar" action="#{pontoBean.pegarPrimeiroNomeMae()}" update="@form"
 							process="@this capaPanel2" rendered="#{pontoBean.numeroAleatorio == 5 and  not seguranca.acessoCadastroPermitido and pontoBean.numeroPergunta > 0}" />
 							
-						<p:commandButton value="Salvar" action="#{pontoBean.pegarPrimeiroNomePai()}" update="@form"
+					<p:commandButton value="Salvar" action="#{pontoBean.pegarPrimeiroNomePai()}" update="@form"
 							process="@this capaPanel2"  rendered="#{pontoBean.numeroAleatorio == 6 and not seguranca.acessoCadastroPermitido and pontoBean.numeroPergunta > 0}" />	
 					
-						<p:commandButton value="Salvar" action="#{pontoBean.pegarSobreNome()}" update="@form"
+					<p:commandButton value="Salvar" action="#{pontoBean.pegarSobreNome()}" update="@form"
 							process="@this capaPanel2"  rendered="#{pontoBean.numeroAleatorio == 7 and not seguranca.acessoCadastroPermitido and pontoBean.numeroPergunta > 0}" />
 							
-						<p:commandButton value="Salvar" action="#{pontoBean.pegarSobreNomeMae()}" update="@form"
+					<p:commandButton value="Salvar" action="#{pontoBean.pegarSobreNomeMae()}" update="@form"
 							process="@this capaPanel2"  rendered="#{pontoBean.numeroAleatorio == 8 and not seguranca.acessoCadastroPermitido and pontoBean.numeroPergunta > 0}" />
 							
-						<p:commandButton value="Salvar" action="#{pontoBean.pegarSobreNomePai()}" update="@form"
+					<p:commandButton value="Salvar" action="#{pontoBean.pegarSobreNomePai()}" update="@form"
 							process="@this capaPanel2"  rendered="#{pontoBean.numeroAleatorio == 9 and not seguranca.acessoCadastroPermitido and pontoBean.numeroPergunta > 0}" />	
 
-						<p:commandButton value="Salvar" action="#{pontoBean.pegarUltimoNome()}" update="@form"
+					<p:commandButton value="Salvar" action="#{pontoBean.pegarUltimoNome()}" update="@form"
 							process="@this capaPanel2"  rendered="#{pontoBean.numeroAleatorio == 10 and not seguranca.acessoCadastroPermitido and pontoBean.numeroPergunta > 0}" />
 							
-						<p:commandButton value="Salvar" action="#{pontoBean.pegarUltimoNomeMae()}" update="@form"
+					<p:commandButton value="Salvar" action="#{pontoBean.pegarUltimoNomeMae()}" update="@form"
 							process="@this capaPanel2"  rendered="#{pontoBean.numeroAleatorio == 11 and not seguranca.acessoCadastroPermitido and pontoBean.numeroPergunta > 0}" />
 							
-						<p:commandButton value="Salvar" action="#{pontoBean.pegarUltimoNomePai()}" update="@form"
+					<p:commandButton value="Salvar" action="#{pontoBean.pegarUltimoNomePai()}" update="@form"
 							process="@this capaPanel2"  rendered="#{pontoBean.numeroAleatorio == 12 and not seguranca.acessoCadastroPermitido and pontoBean.numeroPergunta > 0}" />
 
-						<p:commandButton value="Salvar" action="#{pontoBean.pegarAnoNascimento()}" update="@form"
+					<p:commandButton value="Salvar" action="#{pontoBean.pegarAnoNascimento()}" update="@form"
 							process="@this capaPanel2"  rendered="#{pontoBean.numeroAleatorio == 13 and not seguranca.acessoCadastroPermitido and pontoBean.numeroPergunta > 0}" />
 						
-						<p:commandButton value="Salvar" action="#{pontoBean.pegarMesNascimento()}" update="@form"
+					<p:commandButton value="Salvar" action="#{pontoBean.pegarMesNascimento()}" update="@form"
 							process="@this capaPanel2"  rendered="#{pontoBean.numeroAleatorio == 14 and not seguranca.acessoCadastroPermitido and pontoBean.numeroPergunta > 0}" />
 							
-						<p:commandButton value="Salvar" action="#{pontoBean.pegarDiaNascimento()}" update="@form"
+					<p:commandButton value="Salvar" action="#{pontoBean.pegarDiaNascimento()}" update="@form"
 							process="@this capaPanel2"  rendered="#{pontoBean.numeroAleatorio == 15 and not seguranca.acessoCadastroPermitido and pontoBean.numeroPergunta > 0}" />
 
-						<p:commandButton value="Salvar" action="#{pontoBean.pegarMesInicioEstagio()}" update="@form"
+					<p:commandButton value="Salvar" action="#{pontoBean.pegarMesInicioEstagio()}" update="@form"
 							process="@this capaPanel2"  rendered="#{pontoBean.numeroAleatorio == 16 and not seguranca.acessoCadastroPermitido and pontoBean.numeroPergunta > 0}" />
 
 
 
-					</p:panelGrid>
-					
-					
-					
-
-						
+					</p:panelGrid>	
 					
 					
 				</div>
 			</div>
 
 			
-			<p:dataTable var="ponto" value="#{pontoBean.listar()}">
+			<p:dataTable var="ponto" value="#{pontoBean.listaPontos}"
+						 emptyMessage="Não existe nenhum ponto batido hoje"
+						 rendered="#{not empty pontoBean.listaPontos}">
+				
 				<p:column headerText="Dia">
 					<h:outputText value="#{pontoBean.data}" />
 				</p:column>
@@ -201,6 +196,10 @@
 
 				<p:column headerText="Hora Saida">
 					<h:outputText value="#{ponto.horaSaida}" />
+				</p:column>
+
+				<p:column headerText="Horas Trabalhadas">
+					<h:outputText value="#{ponto.horasTrabalhadas}" />
 				</p:column>
 
 

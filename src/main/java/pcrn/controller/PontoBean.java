@@ -75,6 +75,7 @@ public class PontoBean implements Serializable{
 
 	@Inject
 	private DataService dataService;
+	
 	private PontoFiltro filtro;
 	private List<Ponto> pontosFiltrados;
 
