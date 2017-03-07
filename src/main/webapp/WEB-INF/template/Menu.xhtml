@@ -6,16 +6,24 @@
 	<nav class="aw-menu">
 		<ul>
 			<li>
-				<h:link outcome="/Home"><i class="fa  fa-fw  fa-home"></i>Pagina Inicial</h:link>
+				<h:link outcome="/Home">
+					<i class="fa  fa-fw  fa-home fa-1x" aria-hidden="true"></i>
+					Pagina Inicial
+				</h:link>
 			</li>
 			
 			<li>
 				<h:link outcome="/site/Pessoa/Consulta/Pessoa" rendered="#{seguranca.acessoCadastroPermitido}">
-					<i class="fa  fa-fw  fa-user"></i>Usuario</h:link>
+					<i class="fa  fa-fw  fa-user fa-1x"></i>
+					Usuario
+				</h:link>
 			</li>
 			
 			<li>
-				<h:link outcome="/site/Pessoa/MudarSenha/MudarSenha" ><i class="fa  fa-fw  fa-user"></i>Mudar Sua Senha</h:link>
+				<h:link outcome="/site/Pessoa/MudarSenha/MudarSenha" >
+					<i class="fa fa-lock fa-1x" aria-hidden="true"></i>
+					Mudar Sua Senha
+				</h:link>
 			</li>
 			
 			<!-- 
@@ -26,11 +34,16 @@
 			
 			<li>
 				<h:link outcome="/site/Delegacia/Consulta/Delegacia" rendered="#{seguranca.acessoCadastroPermitido}">
-					<i class="fa  fa-fw  fa-cog"></i>Delegacia</h:link>
+					<i class="fa  fa-fw  fa-cog fa-1x"></i>
+					Delegacia
+				</h:link>
 			</li>
 			
 			<li>
-				<h:link outcome="/site/Ponto/Novo/Ponto"><i class="fa  fa-fw  fa-cog"></i>Ponto</h:link>
+				<h:link outcome="/site/Ponto/Novo/Ponto">
+					<i class="fa  fa-clock-o fa-1x"></i>
+					Ponto
+				</h:link>
 			</li>
 			
 			<li>
