@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.2.2.final using JasperReports Library version 6.2.2  -->
-<!-- 2017-03-02T15:03:41 -->
+<!-- 2017-03-09T17:14:54 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Ponto" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="3e875dea-6fd8-4427-ad3d-972ea974c00f">
-	<property name="com.jaspersoft.studio.data.sql.tables" value="cG9udG8gLDEzNywyNDgsNTNlZTk2NWYtODQ3ZC00YjAzLTg0NDUtNzUyYzhlYjM1MjQ2O3Blc3Nv&#xA;YSAsMzAwLDE1LGVjMTkwMjA5LTM2NzQtNGE4ZC04OGM0LTk1YTA4NmIwMjI2NTtkZWxlZ2FjaWEg&#xA;LDQ3Nyw1MDAsMjMwYzhhYTctMTc5MS00MjhlLWE3MzQtNjhlM2YwN2JhYjc0O2RhdGEgLDE1LDUw&#xA;MCw3OTA3ZmRhOS1lYjhkLTQzNDYtYTQzYS03YTFhNzA0YTdiMTk7"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Ponto"/>
-	<parameter name="codigo_data" class="java.lang.Integer"/>
+	<parameter name="codigo_data_ate" class="java.lang.String"/>
+	<parameter name="codigo_data_de" class="java.lang.Integer"/>
 	<queryString>
 		<![CDATA[SELECT data.data,
 	pessoa.nome_pessoa,
@@ -20,9 +21,9 @@ FROM pessoa
 	 ponto.codigo_pessoa = pessoa.codigo 
 	INNER JOIN data ON 
 	 data.codigo = ponto.codigo_data 
-WHERE 
-	 data.codigo = $P!{codigo_data} 
-ORDER BY pessoa.nome_pessoa ASC]]>
+WHERE
+	 data.codigo BETWEEN $P!{codigo_data_de}  and  $P!{codigo_data_ate} 
+	 order by pessoa.nome_pessoa asc, data.codigo asc]]>
 	</queryString>
 	<field name="data" class="java.lang.String"/>
 	<field name="nome_pessoa" class="java.lang.String"/>
@@ -37,7 +38,7 @@ ORDER BY pessoa.nome_pessoa ASC]]>
 	<title>
 		<band height="79" splitType="Stretch">
 			<staticText>
-				<reportElement x="170" y="4" width="300" height="20" uuid="130345e5-86ee-4578-a50a-7eb595e3710f">
+				<reportElement x="170" y="3" width="300" height="20" uuid="130345e5-86ee-4578-a50a-7eb595e3710f">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 				</reportElement>
 				<textElement textAlignment="Center"/>
@@ -55,7 +56,7 @@ ORDER BY pessoa.nome_pessoa ASC]]>
 				<imageExpression><![CDATA["/opt/tomcat/webapps/Ponto/resources/algaworks/images/Brasao-Policia-Civil-RN.png"]]></imageExpression>
 			</image>
 			<staticText>
-				<reportElement x="105" y="55" width="450" height="20" uuid="60e62c34-e523-45ef-aa76-609c1ef24e88">
+				<reportElement x="105" y="55" width="450" height="20" uuid="ec50f18a-b374-46c6-aa1e-04a0d5b439a7">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 				</reportElement>
 				<textElement textAlignment="Center"/>
@@ -64,9 +65,7 @@ ORDER BY pessoa.nome_pessoa ASC]]>
 		</band>
 	</title>
 	<pageHeader>
-		<band height="60" splitType="Stretch">
-			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
-		</band>
+		<band height="62" splitType="Stretch"/>
 	</pageHeader>
 	<columnHeader>
 		<band height="21" splitType="Stretch">
@@ -165,7 +164,7 @@ ORDER BY pessoa.nome_pessoa ASC]]>
 				<text><![CDATA[Situacao Ponto]]></text>
 			</staticText>
 			<staticText>
-				<reportElement positionType="Float" x="160" y="0" width="65" height="20" uuid="107bb46e-fa10-45db-b9e8-8b01002465be">
+				<reportElement positionType="Float" x="160" y="0" width="65" height="20" uuid="b1930488-8883-46f7-a1d3-4bb6a65967ce">
 					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
@@ -185,7 +184,7 @@ ORDER BY pessoa.nome_pessoa ASC]]>
 		<band height="30" splitType="Stretch">
 			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 			<textField isStretchWithOverflow="true">
-				<reportElement x="0" y="0" width="80" height="30" isPrintWhenDetailOverflows="true" uuid="df71c686-ca6d-41d1-9c1a-7b0ef1fbd9bc">
+				<reportElement x="0" y="0" width="80" height="30" uuid="df71c686-ca6d-41d1-9c1a-7b0ef1fbd9bc">
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
@@ -200,7 +199,7 @@ ORDER BY pessoa.nome_pessoa ASC]]>
 				<textFieldExpression><![CDATA[$F{nome_pessoa}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement x="225" y="0" width="65" height="30" isPrintWhenDetailOverflows="true" uuid="838b9d5a-ebc4-4e15-a678-5edcaa8ccf79">
+				<reportElement x="225" y="0" width="65" height="30" uuid="838b9d5a-ebc4-4e15-a678-5edcaa8ccf79">
 					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
@@ -216,7 +215,7 @@ ORDER BY pessoa.nome_pessoa ASC]]>
 				<textFieldExpression><![CDATA[$F{hora_entrada}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement x="290" y="0" width="65" height="30" isPrintWhenDetailOverflows="true" uuid="afe9b07a-cba6-43a6-8fb7-7a7f9333bee8">
+				<reportElement x="290" y="0" width="65" height="30" uuid="afe9b07a-cba6-43a6-8fb7-7a7f9333bee8">
 					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
@@ -231,7 +230,7 @@ ORDER BY pessoa.nome_pessoa ASC]]>
 				<textFieldExpression><![CDATA[$F{hora_saida}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement x="455" y="0" width="100" height="30" isPrintWhenDetailOverflows="true" uuid="f6fcabec-7701-4c31-a1bc-efdece068a14">
+				<reportElement x="455" y="0" width="100" height="30" uuid="f6fcabec-7701-4c31-a1bc-efdece068a14">
 					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
@@ -246,7 +245,7 @@ ORDER BY pessoa.nome_pessoa ASC]]>
 				<textFieldExpression><![CDATA[$F{horas_trabalhadas}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement x="80" y="0" width="80" height="30" isPrintWhenDetailOverflows="true" uuid="9bf6168f-1a28-4659-b978-ee628b1447c1">
+				<reportElement x="80" y="0" width="80" height="30" uuid="9bf6168f-1a28-4659-b978-ee628b1447c1">
 					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
@@ -262,7 +261,7 @@ ORDER BY pessoa.nome_pessoa ASC]]>
 				<textFieldExpression><![CDATA[$F{nome_delegacia}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement x="355" y="0" width="99" height="30" isPrintWhenDetailOverflows="true" uuid="1e2698ec-cf3d-4497-8b1f-057d4632d9a0">
+				<reportElement x="355" y="0" width="99" height="30" uuid="1e2698ec-cf3d-4497-8b1f-057d4632d9a0">
 					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
@@ -278,7 +277,7 @@ ORDER BY pessoa.nome_pessoa ASC]]>
 				<textFieldExpression><![CDATA[$F{situacao_ponto}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="160" y="0" width="65" height="30" isPrintWhenDetailOverflows="true" uuid="24fb1e4b-a634-4e42-b273-c95d35a20caa">
+				<reportElement x="160" y="0" width="65" height="30" isPrintWhenDetailOverflows="true" uuid="78647007-ce4f-4077-b148-804c42da12c5">
 					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
@@ -302,6 +301,38 @@ ORDER BY pessoa.nome_pessoa ASC]]>
 		<band height="54" splitType="Stretch"/>
 	</pageFooter>
 	<summary>
-		<band height="42" splitType="Stretch"/>
+		<band height="20" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+			<staticText>
+				<reportElement x="355" y="0" width="163" height="20" uuid="1d2eb339-f631-4ed6-8da6-f9d2a5605165">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None"/>
+				<text><![CDATA[Numero de Pontos Batidos]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="480" y="0" width="75" height="20" uuid="89a94cdf-60ff-4d6f-8766-ca878b92d35e">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{REPORT_COUNT}]]></textFieldExpression>
+			</textField>
+		</band>
 	</summary>
 </jasperReport>
