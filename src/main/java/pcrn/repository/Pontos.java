@@ -32,13 +32,23 @@ public class Pontos implements Serializable, IPonto{
 		return ponto;
 	}
 	
-	
-	@SuppressWarnings("unchecked")
 	@Override
-	public List<Ponto> listar(Pessoa pessoa) {
+	public List<Ponto> listarPontoAberto(Pessoa pessoa) {
 		List<Ponto> listaPonto = new ArrayList<Ponto>();
 		Query query = manager.createQuery("from Ponto where codigo_pessoa = :codigo_pessoa and ponto_entrada = TRUE and ponto_saida = FALSE");
 		query.setParameter("codigo_pessoa", pessoa.getCodigo());
+		listaPonto = query.getResultList();		
+		return listaPonto;
+	}
+	
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Ponto> listar(Pessoa pessoa, int codigo_data) {
+		List<Ponto> listaPonto = new ArrayList<Ponto>();
+		Query query = manager.createQuery("from Ponto where codigo_pessoa = :codigo_pessoa and codigo_data = :codigo_data order by codigo asc");
+		query.setParameter("codigo_pessoa", pessoa.getCodigo());
+		query.setParameter("codigo_data", codigo_data);
 		listaPonto = query.getResultList();
 		return listaPonto;
 	}
@@ -98,5 +108,8 @@ public class Pontos implements Serializable, IPonto{
 		// TODO Auto-generated method stub
 		
 	}
+
+
+	
 
 }

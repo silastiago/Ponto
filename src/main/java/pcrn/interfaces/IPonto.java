@@ -9,7 +9,8 @@ import pcrn.repository.filter.PontoFiltro;
 public interface IPonto {
 	
 	public Ponto retornaPonto(Pessoa pessoa);
-	public List<Ponto> listar(Pessoa pessoa);
+	public List<Ponto> listar(Pessoa pessoa, int codigo_data);
+	public List<Ponto> listarPontoAberto(Pessoa pessoa);
 	public List<Ponto> listarPontosEntreDatas(PontoFiltro filtro);
 	public List<Ponto> listarPontoDataEspecifica(PontoFiltro filtro);
 	public List<Ponto> listarPontosEntreDatasUsuario(PontoFiltro filtro);

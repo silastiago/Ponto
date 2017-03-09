@@ -184,7 +184,10 @@ public class PontoBean implements Serializable{
 	}
 
 	public boolean isRenderizarBotaoCadastrarEntrada(){
-		listaPontos = listar();
+		/*ponto = pontoService.retornarPonto(pessoaLogada);
+		System.out.println("Ponto: "+ ponto.getCodigo());*/
+		
+		listaPontos = pontoService.listarPontoAberto(pessoaLogada);
 		if (listaPontos.size() > 0) {
 			return false;
 		}
@@ -278,7 +281,12 @@ public class PontoBean implements Serializable{
 	
 
 	public List<Ponto> listar(){
-		listaPontos = pontoService.listar(pessoaLogada);
+		String dataAtual = FacesUtil.retornaDataAtual();
+		int codigo_data = dataService.listarData(dataAtual);
+		
+		if (pontoService.listar(pessoaLogada, codigo_data).size() > 0) {
+			listaPontos = pontoService.listar(pessoaLogada,codigo_data);
+		}
 
 		return listaPontos;
 	}

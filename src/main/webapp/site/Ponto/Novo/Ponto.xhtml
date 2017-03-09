@@ -182,9 +182,8 @@
 			</div>
 
 			
-			<p:dataTable var="ponto" value="#{pontoBean.listaPontos}"
-						 emptyMessage="Não existe nenhum ponto batido hoje"
-						 rendered="#{not empty pontoBean.listaPontos}">
+			<p:dataTable var="ponto" value="#{pontoBean.listar()}"
+						 emptyMessage="Não existe nenhum ponto batido hoje">
 				
 				<p:column headerText="Dia">
 					<h:outputText value="#{pontoBean.data}" />

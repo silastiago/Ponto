@@ -27,10 +27,16 @@ public class PontoService implements Serializable{
 	}
 	
 	@Transactional
-	public List<Ponto> listar(Pessoa pessoa){
-		return pontos.listar(pessoa);
+	public List<Ponto> listar(Pessoa pessoa, int codigo_data){
+		return pontos.listar(pessoa, codigo_data);
 	}
 
+	@Transactional
+	public List<Ponto> listarPontoAberto(Pessoa pessoa){
+		return pontos.listarPontoAberto(pessoa);
+	}
+	
+	
 	@Transactional
 	public List<Ponto> listarPontosEntreDatas(PontoFiltro filtro){
 		return pontos.listarPontosEntreDatas(filtro);
