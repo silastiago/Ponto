@@ -142,7 +142,7 @@ public class PontoBean implements Serializable{
 
 		ponto = pontoService.retornarPonto(pessoaLogada);
 		String horaAtual = FacesUtil.retornaHoraAtual();
-		System.out.println("Hora Atual: " + horaAtual);
+		//System.out.println("Hora Atual: " + horaAtual);
 		String horasTrabalhadas = FacesUtil.horasTrabalhadas(ponto.getHoraEntrada(), horaAtual);
 		String nome = null;
 
