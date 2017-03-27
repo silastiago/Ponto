@@ -215,14 +215,14 @@ public class PontoBean implements Serializable{
 					
 					if (pessoa.getGrupos().get(i).getNome().contains("ADMINISTRADOR")) {
 					parametros.put("codigo_data", filtro.getDataCriacaoDe());
-					executor = new ExecutorRelatorio("/relatorios/PontoDataEspecificaTodosUsuarios.jasper",
+					executor = new ExecutorRelatorio("/relatorios/casa/PontoDataEspecificaTodosUsuarios.jasper",
 							this.response, parametros, "relatorios.pdf");
 					
 					}else{
 						filtro.setPessoa(pessoa);
 						parametros.put("codigo_data", filtro.getDataCriacaoDe());
 						parametros.put("codigo_pessoa", filtro.getPessoa().getCodigo());
-						executor = new ExecutorRelatorio("/relatorios/PontoDataEspecificaUsuario.jasper",
+						executor = new ExecutorRelatorio("/relatorios/casa/PontoDataEspecificaUsuario.jasper",
 								this.response, parametros, "relatorios.pdf");
 					}	
 					
@@ -235,7 +235,7 @@ public class PontoBean implements Serializable{
 					
 						parametros.put("codigo_data_de", filtro.getDataCriacaoDe());
 						parametros.put("codigo_data_ate", filtro.getDataCriacaoAte());
-						executor = new ExecutorRelatorio("/relatorios/PontoEntreDatasTodosUsuarios.jasper",
+						executor = new ExecutorRelatorio("/relatorios/casa/PontoEntreDatasTodosUsuarios.jasper",
 								this.response, parametros, "relatorios.pdf");
 					
 					}else{
@@ -243,7 +243,7 @@ public class PontoBean implements Serializable{
 						parametros.put("codigo_pessoa", filtro.getPessoa().getCodigo());
 						parametros.put("codigo_data_de", filtro.getDataCriacaoDe());
 						parametros.put("codigo_data_ate", filtro.getDataCriacaoAte());
-						executor = new ExecutorRelatorio("/relatorios/PontoEntreDatasUsuario.jasper",
+						executor = new ExecutorRelatorio("/relatorios/casa/PontoEntreDatasUsuario.jasper",
 								this.response, parametros, "relatorios.pdf");
 					}
 				}
@@ -254,7 +254,7 @@ public class PontoBean implements Serializable{
 			if (criterio.equals("data")) {
 					parametros.put("codigo_data", filtro.getDataCriacaoDe());
 					parametros.put("codigo_pessoa", filtro.getPessoa().getCodigo());
-					executor = new ExecutorRelatorio("/relatorios/PontoDataEspecificaUsuario.jasper",
+					executor = new ExecutorRelatorio("/relatorios/casa/PontoDataEspecificaUsuario.jasper",
 							this.response, parametros, "relatorios.pdf");
 				
 			}else if (criterio.equals("datas")) {
@@ -262,7 +262,7 @@ public class PontoBean implements Serializable{
 						parametros.put("codigo_pessoa", filtro.getPessoa().getCodigo());
 						parametros.put("codigo_data_de", filtro.getDataCriacaoDe());
 						parametros.put("codigo_data_ate", filtro.getDataCriacaoAte());
-						executor = new ExecutorRelatorio("/relatorios/PontoEntreDatasUsuario.jasper",
+						executor = new ExecutorRelatorio("/relatorios/casa/PontoEntreDatasUsuario.jasper",
 								this.response, parametros, "relatorios.pdf");
 						
 					
