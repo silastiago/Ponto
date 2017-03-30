@@ -32,21 +32,8 @@ public class LoginBean implements Serializable {
 	private HttpServletResponse response;
 	
 	private String login;
-
-	private static int Aleatorio(int numero){
-		Random numeroAleatorio = new Random();
-		return numeroAleatorio.nextInt(numero);
-	}
 	
 	public void logar() throws ServletException, IOException {
-		ArrayList<String> listaPaginas = new ArrayList<String>();
-		listaPaginas.add("pegarDoisUltimosDigitosCPF.xhtml");
-		listaPaginas.add("pegarTresPrimeirosDigitosCPF.xhtml");
-		listaPaginas.add("pegarTresUltimosDigitosRG.xhtml");
-		listaPaginas.add("pegarTresUltimosDigitosRG.xhtml");
-		listaPaginas.add("pegarPrimeiroNomePai.xhtml");
-	
-		String pagina = listaPaginas.get(Aleatorio(5));
 				
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/j_spring_security_check");
 		dispatcher.forward(request, response);

@@ -54,7 +54,7 @@ public class FacesUtil {
 		FacesContext.getCurrentInstance().addMessage(null, 
 				new FacesMessage(FacesMessage.SEVERITY_ERROR, message, message));
 	}
-
+	
 
 	public static String horasTrabalhadas(String horarioEntrada, String horarioSaida) {
 		String horasTrabalhadas = "";

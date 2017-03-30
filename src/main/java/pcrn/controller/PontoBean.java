@@ -127,15 +127,10 @@ public class PontoBean implements Serializable{
 
 		numeroCadastro = 0;
 		numeroPergunta = 3;
-
-		FacesContext fc = FacesContext.getCurrentInstance();
-
-		try {
-			fc.getExternalContext().redirect("../../../Home.xhtml");
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		
+		
+		FacesContext.getCurrentInstance().addMessage("message" , new FacesMessage(FacesMessage.SEVERITY_INFO, "","Entrada batida com sucesso"));
+		
 	}
 
 	public void cadastrarSaida(){
@@ -161,13 +156,8 @@ public class PontoBean implements Serializable{
 
 
 		FacesContext fc = FacesContext.getCurrentInstance();
-
-		try {
-			fc.getExternalContext().redirect("../../../Home.xhtml");
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		
+		FacesContext.getCurrentInstance().addMessage("message" , new FacesMessage(FacesMessage.SEVERITY_INFO, "","Saida batida com sucesso"));
 	}
 
 	private UsuarioSistema getUsuarioLogado() {
