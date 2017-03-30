@@ -34,7 +34,7 @@ public class GerarRelatorio implements Serializable {
 		ConnectionFactory conexao = new ConnectionFactory();
 		Connection conn = conexao.getConnection();
 		//String caminhoRelatorio = "C:/Users/Sinf02/git/Ponto/src/main/resources/relatorios/";
-		String caminhoRelatorio = "/opt/tomcat/webapps/Ponto/WEB-INF/classes/relatorios/";
+		String caminhoRelatorio = "/opt/tomcat/webapps/Ponto/WEB-INF/classes/relatorios/Servidor/";
 		
 		
 		System.out.println("Codigo data: "+  data.getCodigo());

@@ -127,10 +127,20 @@ public class PontoBean implements Serializable{
 
 		numeroCadastro = 0;
 		numeroPergunta = 3;
+
+		FacesContext.getCurrentInstance().addMessage("message" , new FacesMessage(FacesMessage.SEVERITY_INFO, "","Entrada Batida com sucesso!"));
+		
+		FacesContext fc = FacesContext.getCurrentInstance();
+		fc.getExternalContext()
+	      .getFlash().setKeepMessages(true);
 		
 		
-		FacesContext.getCurrentInstance().addMessage("message" , new FacesMessage(FacesMessage.SEVERITY_INFO, "","Entrada batida com sucesso"));
-		
+		try {
+			fc.getExternalContext().redirect("../../../Home.xhtml");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	public void cadastrarSaida(){
@@ -155,9 +165,18 @@ public class PontoBean implements Serializable{
 		pontoService.salvar(ponto);
 
 
-		FacesContext fc = FacesContext.getCurrentInstance();
+		FacesContext.getCurrentInstance().addMessage("message" , new FacesMessage(FacesMessage.SEVERITY_INFO, "","Saida Batida com sucesso!"));
 		
-		FacesContext.getCurrentInstance().addMessage("message" , new FacesMessage(FacesMessage.SEVERITY_INFO, "","Saida batida com sucesso"));
+		FacesContext fc = FacesContext.getCurrentInstance();
+		fc.getExternalContext()
+	      .getFlash().setKeepMessages(true);
+
+		try {
+			fc.getExternalContext().redirect("../../../Home.xhtml");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	private UsuarioSistema getUsuarioLogado() {
@@ -205,14 +224,14 @@ public class PontoBean implements Serializable{
 					
 					if (pessoa.getGrupos().get(i).getNome().contains("ADMINISTRADOR")) {
 					parametros.put("codigo_data", filtro.getDataCriacaoDe());
-					executor = new ExecutorRelatorio("/relatorios/casa/PontoDataEspecificaTodosUsuarios.jasper",
+					executor = new ExecutorRelatorio("/relatorios/Servidor/PontoDataEspecificaTodosUsuarios.jasper",
 							this.response, parametros, "relatorios.pdf");
 					
 					}else{
 						filtro.setPessoa(pessoa);
 						parametros.put("codigo_data", filtro.getDataCriacaoDe());
 						parametros.put("codigo_pessoa", filtro.getPessoa().getCodigo());
-						executor = new ExecutorRelatorio("/relatorios/casa/PontoDataEspecificaUsuario.jasper",
+						executor = new ExecutorRelatorio("/relatorios/Servidor/PontoDataEspecificaUsuario.jasper",
 								this.response, parametros, "relatorios.pdf");
 					}	
 					
@@ -225,7 +244,7 @@ public class PontoBean implements Serializable{
 					
 						parametros.put("codigo_data_de", filtro.getDataCriacaoDe());
 						parametros.put("codigo_data_ate", filtro.getDataCriacaoAte());
-						executor = new ExecutorRelatorio("/relatorios/casa/PontoEntreDatasTodosUsuarios.jasper",
+						executor = new ExecutorRelatorio("/relatorios/Servidor/PontoEntreDatasTodosUsuarios.jasper",
 								this.response, parametros, "relatorios.pdf");
 					
 					}else{
@@ -233,7 +252,7 @@ public class PontoBean implements Serializable{
 						parametros.put("codigo_pessoa", filtro.getPessoa().getCodigo());
 						parametros.put("codigo_data_de", filtro.getDataCriacaoDe());
 						parametros.put("codigo_data_ate", filtro.getDataCriacaoAte());
-						executor = new ExecutorRelatorio("/relatorios/casa/PontoEntreDatasUsuario.jasper",
+						executor = new ExecutorRelatorio("/relatorios/Servidor/PontoEntreDatasUsuario.jasper",
 								this.response, parametros, "relatorios.pdf");
 					}
 				}
@@ -244,7 +263,7 @@ public class PontoBean implements Serializable{
 			if (criterio.equals("data")) {
 					parametros.put("codigo_data", filtro.getDataCriacaoDe());
 					parametros.put("codigo_pessoa", filtro.getPessoa().getCodigo());
-					executor = new ExecutorRelatorio("/relatorios/casa/PontoDataEspecificaUsuario.jasper",
+					executor = new ExecutorRelatorio("/relatorios/Servidor/PontoDataEspecificaUsuario.jasper",
 							this.response, parametros, "relatorios.pdf");
 				
 			}else if (criterio.equals("datas")) {
@@ -252,7 +271,7 @@ public class PontoBean implements Serializable{
 						parametros.put("codigo_pessoa", filtro.getPessoa().getCodigo());
 						parametros.put("codigo_data_de", filtro.getDataCriacaoDe());
 						parametros.put("codigo_data_ate", filtro.getDataCriacaoAte());
-						executor = new ExecutorRelatorio("/relatorios/casa/PontoEntreDatasUsuario.jasper",
+						executor = new ExecutorRelatorio("/relatorios/Servidor/PontoEntreDatasUsuario.jasper",
 								this.response, parametros, "relatorios.pdf");
 						
 					
@@ -530,7 +549,6 @@ public class PontoBean implements Serializable{
 			FacesContext.getCurrentInstance().addMessage("message" , new FacesMessage(FacesMessage.SEVERITY_ERROR, "","Resposta Errada"));
 
 		}
-
 	}
 
 	public void pegarSobreNomePai(){
@@ -552,7 +570,6 @@ public class PontoBean implements Serializable{
 			FacesContext.getCurrentInstance().addMessage("message" , new FacesMessage(FacesMessage.SEVERITY_ERROR, "","Resposta Errada"));
 
 		}
-
 	}
 
 	public void pegarUltimoNome(){
@@ -596,7 +613,6 @@ public class PontoBean implements Serializable{
 			FacesContext.getCurrentInstance().addMessage("message" , new FacesMessage(FacesMessage.SEVERITY_ERROR, "","Resposta Errada"));
 
 		}
-
 	}
 
 	public void pegarUltimoNomePai(){
@@ -618,7 +634,6 @@ public class PontoBean implements Serializable{
 			FacesContext.getCurrentInstance().addMessage("message" , new FacesMessage(FacesMessage.SEVERITY_ERROR, "","Resposta Errada"));
 
 		}
-
 	}
 
 	public void pegarAnoNascimento(){
@@ -640,7 +655,6 @@ public class PontoBean implements Serializable{
 			FacesContext.getCurrentInstance().addMessage("message" , new FacesMessage(FacesMessage.SEVERITY_ERROR, "","Resposta Errada"));
 
 		}
-
 	}
 
 	public void pegarMesNascimento(){
@@ -662,7 +676,6 @@ public class PontoBean implements Serializable{
 			FacesContext.getCurrentInstance().addMessage("message" , new FacesMessage(FacesMessage.SEVERITY_ERROR, "","Resposta Errada"));
 
 		}
-
 	}
 
 	public void pegarDiaNascimento(){
@@ -687,7 +700,6 @@ public class PontoBean implements Serializable{
 			FacesContext.getCurrentInstance().addMessage("message" , new FacesMessage(FacesMessage.SEVERITY_ERROR, "","Resposta Errada"));
 
 		}
-
 	}
 
 	public void pegarMesInicioEstagio(){
@@ -710,10 +722,12 @@ public class PontoBean implements Serializable{
 			FacesContext.getCurrentInstance().addMessage("message" , new FacesMessage(FacesMessage.SEVERITY_ERROR, "","Resposta Errada"));
 
 		}
-
 	}
 
-	
+	public int Aleatorio(){
+		Random numeroAleatorio = new Random();
+		return numeroAleatorio.nextInt(17);
+	}
 	
 	public int getNumeroPergunta() {
 		return numeroPergunta;
@@ -729,11 +743,6 @@ public class PontoBean implements Serializable{
 
 	public void setNumeroCadastro(int numeroCadastro) {
 		this.numeroCadastro = numeroCadastro;
-	}
-
-	public int Aleatorio(){
-		Random numeroAleatorio = new Random();
-		return numeroAleatorio.nextInt(17);
 	}
 
 	public int getNumeroAleatorio() {

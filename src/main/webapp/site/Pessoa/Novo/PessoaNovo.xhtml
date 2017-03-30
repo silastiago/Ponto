@@ -80,7 +80,7 @@
 					<p:inputText id="ultimonomemae" value="#{pessoaBean.pessoa.ultimoNomeMae}" />
 					
 					<p:outputLabel value="Grupo" for="grupo" />
-					<p:selectManyCheckbox id="grupo" value="#{pessoaBean.pessoa.grupos}" converter="grupoConverter" layout="responsive" columns="2">
+					<p:selectManyCheckbox id="grupo" value="#{pessoaBean.pessoa.grupos}" converter="grupoConverter" layout="pageDirection" columns="2">
         			<f:selectItems value="#{pessoaBean.listaGrupos}" var="grupos" itemValue="#{grupos}" itemLabel="#{grupos.nome}"/>
     				</p:selectManyCheckbox>
     				
